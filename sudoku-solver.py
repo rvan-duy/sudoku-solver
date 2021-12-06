@@ -1,19 +1,17 @@
 def solve(board):
-    board_size = range(board)
 
-    for row in board_size:
-        for col in board_size:
-            value = 1
-            check_if_valid(value)
-
-            if board[row][col] == 0:
-                board[row][col] = value
-            else:
-                value += 1
+    for row in range(len(board)):
+        for col in range(len(board)):
+            for number in range(1, 9):
+                if check_if_valid(number, row, col, board):
+                    board[row][col] = number
 
 
 # Checks if value is allowed to be in the current square (row/col)
 def check_if_valid(value, row_of_value, col_of_value, board):
+
+    if board[row_of_value][col_of_value] != 0:
+        return False
 
     # Check if number already exists in the same row
     for col in board[row_of_value]:
@@ -36,14 +34,16 @@ def check_if_valid(value, row_of_value, col_of_value, board):
     return True
 
 
-test_board = [[0, 0, 7, 6, 0, 0, 0, 3, 4],
-              [2, 8, 9, 0, 0, 4, 0, 0, 0],
-              [3, 4, 6, 2, 0, 5, 0, 9, 0],
-              [6, 0, 2, 0, 0, 0, 0, 1, 0],
-              [0, 3, 8, 0, 0, 6, 0, 4, 7],
-              [0, 0, 0, 0, 0, 1, 0, 0, 0],
-              [0, 9, 0, 0, 0, 0, 0, 7, 8],
-              [7, 0, 3, 4, 0, 0, 5, 6, 0],
-              [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+test_board = [[2, 9, 0, 0, 0, 0, 0, 7, 0],
+              [3, 0, 6, 0, 0, 8, 4, 0, 0],
+              [8, 0, 0, 0, 4, 0, 0, 0, 2],
+              [0, 2, 0, 0, 3, 1, 0, 0, 7],
+              [0, 0, 0, 0, 8, 0, 0, 0, 0],
+              [1, 0, 0, 9, 5, 0, 0, 6, 0],
+              [7, 0, 0, 0, 9, 0, 0, 0, 1],
+              [0, 0, 1, 2, 0, 0, 3, 0, 6],
+              [0, 3, 0, 0, 0, 0, 0, 5, 9]]
 
-print(check_if_valid(1, 4, 4, test_board))
+solve(test_board)
+for row in test_board:
+    print(row)
