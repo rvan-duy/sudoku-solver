@@ -25,19 +25,25 @@ def check_if_valid(value, row_of_value, col_of_value, board):
         if value == row[col_of_value]:
             return False
 
-    # TODO Check if number is already in the allowed square
+    # Check if number is already in the allowed square
+    start_row = row_of_value - (row_of_value % 3)
+    start_col = col_of_value - (col_of_value % 3)
+    for row in range(start_row, start_row + 3):
+        for col in range(start_col, start_col + 3):
+            if value == board[row][col]:
+                return False
 
     return True
 
 
-test_board = [[5, 0, 7, 6, 1, 0, 0, 3, 4],
+test_board = [[0, 0, 7, 6, 0, 0, 0, 3, 4],
               [2, 8, 9, 0, 0, 4, 0, 0, 0],
               [3, 4, 6, 2, 0, 5, 0, 9, 0],
               [6, 0, 2, 0, 0, 0, 0, 1, 0],
               [0, 3, 8, 0, 0, 6, 0, 4, 7],
-              [0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 1, 0, 0, 0],
               [0, 9, 0, 0, 0, 0, 0, 7, 8],
               [7, 0, 3, 4, 0, 0, 5, 6, 0],
               [0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
-print(check_if_valid(1, 0, 4, test_board))
+print(check_if_valid(1, 4, 4, test_board))
